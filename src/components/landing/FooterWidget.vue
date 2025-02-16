@@ -1,3 +1,13 @@
+<script>
+export default {
+    methods: {
+        smoothScroll(target) {
+            document.querySelector(target).scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+};
+</script>
+
 <template>
     <div class="py-6 px-6 mx-0 mt-20 lg:mx-20">
         <div class="grid grid-cols-12 gap-4">
@@ -61,13 +71,3 @@
         </div>
     </div>
 </template>
-
-<script>
-export default {
-    methods: {
-        smoothScroll(target) {
-            document.querySelector(target).scrollIntoView({ behavior: 'smooth' });
-        }
-    }
-};
-</script>

@@ -3,7 +3,6 @@ import { axiosInstance } from '@/api/axiosInstance';
 const path = 'product;';
 
 const ProductService = {
-
     async createProduct(postData) {
         try {
             const formData = new FormData();
@@ -13,7 +12,7 @@ const ProductService = {
             formData.append('image', postData.image);
             formData.append('categoryId', postData.categoryId);
 
-            const response = await axiosInstance.post(path, formData,{
+            const response = await axiosInstance.post(path, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -35,7 +34,7 @@ const ProductService = {
 
     async getProductById(id) {
         try {
-            const response = await axiosInstance.get(path + "/" +id);
+            const response = await axiosInstance.get(path + '/' + id);
             return response.data;
         } catch (error) {
             return error;
@@ -51,9 +50,9 @@ const ProductService = {
             formData.append('image', postData.image);
             formData.append('categoryId', postData.categoryId);
 
-            const url = path + "/" + id;
+            const url = path + '/' + id;
 
-            const response = await axiosInstance.put(url, formData,{
+            const response = await axiosInstance.put(url, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -66,13 +65,11 @@ const ProductService = {
 
     async deleteProduct(id) {
         try {
-            const response = await axiosInstance.delete(path + "/" + id);
+            const response = await axiosInstance.delete(path + '/' + id);
             return response.data;
         } catch (error) {
             return error;
         }
     }
-
-
 };
 export default ProductService;

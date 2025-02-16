@@ -1,50 +1,3 @@
-<template>
-    <div class="card w-full">
-        <div class="page-title">Kategori Düzenleme</div>
-        <div class="w-full mt-4">
-            <Form v-slot="$form" :initialValues="categoryForm" :resolver="resolver" :validateOn @submit="onFormSubmit" class="flex flex-col gap-4">
-                <div class="w-full flex flex-wrap gap-4">
-                    <!-- Name Field -->
-                    <FormField as="section" name="name" initialValue="" class="w-[49%] py-2">
-                        <label for="name" class="block mb-2 font-medium">Kategori Adı</label>
-                        <InputText v-model="categoryForm.name" class="w-full" type="text" placeholder="Kategori Adı" id="name" />
-                        <Message v-if="$form.name?.invalid" severity="error" size="small" variant="simple">
-                            {{ $form.name.error.message }}
-                        </Message>
-                    </FormField>
-
-                    <!-- Description Field -->
-                    <FormField as="section" name="description" initialValue="" class="w-[49%] py-2">
-                        <label for="description" class="block mb-2 font-medium">Kategori Açıklaması</label>
-                        <Textarea v-model="categoryForm.description" class="w-full" placeholder="Kategori Açıklaması" :autoResize="true" rows="5" id="description" />
-                        <Message v-if="$form.description?.invalid" severity="error" size="small" variant="simple">
-                            {{ $form.description.error.message }}
-                        </Message>
-                    </FormField>
-
-                    <!-- Image Field -->
-                    <FormField as="section" name="image" initialValue="" class="py-2 flex items-start flex-col">
-                        <label for="image" class="block mb-2 font-medium">Kategori Resmi</label>
-                        <div v-if="image" class="image-upload-container">
-                            <img :src="imagePath + image" alt="Selected Image" class="w-full h-full object-fill rounded-lg" />
-                            <Button icon="pi pi-trash" class="image-upload-delete-button p-button-danger" @click="removeImage" />
-                        </div>
-                        <FileUpload v-else mode="basic" name="image" accept="image/*" :maxFileSize="1000000" :file-limit="1" @select="onImageUpload" chooseLabel="Seç" :auto="false" uploadLabel="Yükle" cancelLabel="İptal" id="image" />
-                        <Message v-if="$form.image?.invalid" severity="error" size="small" variant="simple">
-                            {{ $form.image.error.message }}
-                        </Message>
-                    </FormField>
-
-                    <!-- Submit Button -->
-                    <div class="w-full flex justify-end mt-4">
-                        <Button type="submit" label="Güncelle" class="p-button-success" />
-                    </div>
-                </div>
-            </Form>
-        </div>
-    </div>
-</template>
-
 <script setup>
 import { onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
@@ -144,6 +97,53 @@ const getCategoryById = async () => {
     }
 };
 </script>
+
+<template>
+    <div class="card w-full">
+        <div class="page-title">Kategori Düzenleme</div>
+        <div class="w-full mt-4">
+            <Form v-slot="$form" :initialValues="categoryForm" :resolver="resolver" :validateOn @submit="onFormSubmit" class="flex flex-col gap-4">
+                <div class="w-full flex flex-wrap gap-4">
+                    <!-- Name Field -->
+                    <FormField as="section" name="name" initialValue="" class="w-[49%] py-2">
+                        <label for="name" class="block mb-2 font-medium">Kategori Adı</label>
+                        <InputText v-model="categoryForm.name" class="w-full" type="text" placeholder="Kategori Adı" id="name" />
+                        <Message v-if="$form.name?.invalid" severity="error" size="small" variant="simple">
+                            {{ $form.name.error.message }}
+                        </Message>
+                    </FormField>
+
+                    <!-- Description Field -->
+                    <FormField as="section" name="description" initialValue="" class="w-[49%] py-2">
+                        <label for="description" class="block mb-2 font-medium">Kategori Açıklaması</label>
+                        <Textarea v-model="categoryForm.description" class="w-full" placeholder="Kategori Açıklaması" :autoResize="true" rows="5" id="description" />
+                        <Message v-if="$form.description?.invalid" severity="error" size="small" variant="simple">
+                            {{ $form.description.error.message }}
+                        </Message>
+                    </FormField>
+
+                    <!-- Image Field -->
+                    <FormField as="section" name="image" initialValue="" class="py-2 flex items-start flex-col">
+                        <label for="image" class="block mb-2 font-medium">Kategori Resmi</label>
+                        <div v-if="image" class="image-upload-container">
+                            <img :src="imagePath + image" alt="Selected Image" class="w-full h-full object-fill rounded-lg" />
+                            <Button icon="pi pi-trash" class="image-upload-delete-button p-button-danger" @click="removeImage" />
+                        </div>
+                        <FileUpload v-else mode="basic" name="image" accept="image/*" :maxFileSize="1000000" :file-limit="1" @select="onImageUpload" chooseLabel="Seç" :auto="false" uploadLabel="Yükle" cancelLabel="İptal" id="image" />
+                        <Message v-if="$form.image?.invalid" severity="error" size="small" variant="simple">
+                            {{ $form.image.error.message }}
+                        </Message>
+                    </FormField>
+
+                    <!-- Submit Button -->
+                    <div class="w-full flex justify-end mt-4">
+                        <Button type="submit" label="Güncelle" class="p-button-success" />
+                    </div>
+                </div>
+            </Form>
+        </div>
+    </div>
+</template>
 
 <style scoped>
 .image-upload-container {

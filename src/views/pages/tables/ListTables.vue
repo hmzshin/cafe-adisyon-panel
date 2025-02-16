@@ -1,56 +1,10 @@
-<template>
-    <div class="card w-full">
-        <div class="page-title">Masa Listesi</div>
-        <div class="w-full mt-4">
-            <DataTable
-                :value="tableList"
-                :paginator="true"
-                :rows="10"
-                :rowsPerPageOptions="[5, 10, 20, 50]"
-                paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                currentPageReportTemplate="{first} - {last} / {totalRecords} Masalar"
-                responsiveLayout="scroll"
-            >
-                <!-- Table ID Column -->
-                <Column field="id" header="Masa ID" :sortable="true"></Column>
-
-                <!-- Table Name Column -->
-                <Column field="name" header="Masa Adı" :sortable="true"></Column>
-
-                <!-- Table Capacity Column -->
-                <Column field="capacity" header="Kapasite" :sortable="true">
-                    <template #body="{ data }">
-                        {{ data.capacity }}
-                    </template>
-                </Column>
-
-                <!-- Actions Column (Optional) -->
-                <Column header="İşlemler">
-                    <template #body="{ data }">
-                        <Button
-                            icon="pi pi-pencil"
-                            class="p-button-rounded p-button-success p-button-text"
-                            @click="editTable(data.id)"
-                        />
-                        <Button
-                            icon="pi pi-trash"
-                            class="p-button-rounded p-button-danger p-button-text"
-                            @click="deleteTable(data.id)"
-                        />
-                    </template>
-                </Column>
-            </DataTable>
-        </div>
-    </div>
-</template>
-
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useToast } from 'primevue/usetoast';
 import { useRouter } from 'vue-router';
 
 import tableService from '@/service/TableService';
-import { useStore } from "@/store/store.js"; // Your table service for API calls
+import { useStore } from '@/store/store.js'; // Your table service for API calls
 
 const toast = useToast();
 const tableList = ref([]); // Holds the list of tableList
@@ -94,6 +48,44 @@ const deleteTable = async (tableId) => {
     }
 };
 </script>
+
+<template>
+    <div class="card w-full">
+        <div class="page-title">Masa Listesi</div>
+        <div class="w-full mt-4">
+            <DataTable
+                :value="tableList"
+                :paginator="true"
+                :rows="10"
+                :rowsPerPageOptions="[5, 10, 20, 50]"
+                paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+                currentPageReportTemplate="{first} - {last} / {totalRecords} Masalar"
+                responsiveLayout="scroll"
+            >
+                <!-- Table ID Column -->
+                <Column field="id" header="Masa ID" :sortable="true"></Column>
+
+                <!-- Table Name Column -->
+                <Column field="name" header="Masa Adı" :sortable="true"></Column>
+
+                <!-- Table Capacity Column -->
+                <Column field="capacity" header="Kapasite" :sortable="true">
+                    <template #body="{ data }">
+                        {{ data.capacity }}
+                    </template>
+                </Column>
+
+                <!-- Actions Column (Optional) -->
+                <Column header="İşlemler">
+                    <template #body="{ data }">
+                        <Button icon="pi pi-pencil" class="p-button-rounded p-button-success p-button-text" @click="editTable(data.id)" />
+                        <Button icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text" @click="deleteTable(data.id)" />
+                    </template>
+                </Column>
+            </DataTable>
+        </div>
+    </div>
+</template>
 
 <style scoped>
 /* Add custom styles if needed */

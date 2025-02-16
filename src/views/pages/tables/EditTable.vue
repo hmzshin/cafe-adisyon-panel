@@ -1,40 +1,5 @@
-<template>
-    <div class="card w-full">
-        <div class="page-title">Masa Düzenleme</div>
-        <div class="w-full mt-4">
-            <Form v-slot="$form" :initialValues="tableForm" :resolver="resolver" :validateOn @submit="onFormSubmit" class="flex flex-col gap-4">
-                <div class="w-full flex flex-wrap gap-4">
-                    <!-- Table Name Field -->
-                    <FormField as="section" name="name" initialValue="" class="w-[49%] py-2">
-                        <label for="name" class="block mb-2 font-medium">Masa Adı</label>
-                        <InputText id="name" v-model="tableForm.name" class="w-full" type="text" placeholder="Masa Adı" />
-                        <Message v-if="$form.name?.invalid" severity="error" size="small" variant="simple">
-                            {{ $form.name.error.message }}
-                        </Message>
-                    </FormField>
-
-                    <!-- Table Capacity Field -->
-                    <FormField as="section" name="capacity" initialValue="" class="w-[49%] py-2">
-                        <label for="capacity" class="block mb-2 font-medium">Kapasite</label>
-                        <InputNumber id="capacity" v-model="tableForm.capacity" class="w-full" placeholder="Masa Kapasitesi" :min="1" />
-                        <Message v-if="$form.capacity?.invalid" severity="error" size="small" variant="simple">
-                            {{ $form.capacity.error.message }}
-                        </Message>
-                    </FormField>
-
-                    <!-- Submit Button -->
-                    <div class="w-full flex justify-end mt-4">
-                        <Button type="submit" label="Güncelle" class="p-button-success" />
-                    </div>
-                </div>
-            </Form>
-        </div>
-    </div>
-</template>
-
 <script setup>
 import { onMounted, ref, watch } from 'vue';
-import { useStore } from '@/store/store';
 import { useToast } from 'primevue/usetoast';
 import { useRouter } from 'vue-router';
 import { zodResolver } from '@primevue/forms/resolvers/zod';
@@ -116,6 +81,40 @@ const onFormSubmit = async ({ valid }) => {
     }
 };
 </script>
+
+<template>
+    <div class="card w-full">
+        <div class="page-title">Masa Düzenleme</div>
+        <div class="w-full mt-4">
+            <Form v-slot="$form" :initialValues="tableForm" :resolver="resolver" :validateOn @submit="onFormSubmit" class="flex flex-col gap-4">
+                <div class="w-full flex flex-wrap gap-4">
+                    <!-- Table Name Field -->
+                    <FormField as="section" name="name" initialValue="" class="w-[49%] py-2">
+                        <label for="name" class="block mb-2 font-medium">Masa Adı</label>
+                        <InputText id="name" v-model="tableForm.name" class="w-full" type="text" placeholder="Masa Adı" />
+                        <Message v-if="$form.name?.invalid" severity="error" size="small" variant="simple">
+                            {{ $form.name.error.message }}
+                        </Message>
+                    </FormField>
+
+                    <!-- Table Capacity Field -->
+                    <FormField as="section" name="capacity" initialValue="" class="w-[49%] py-2">
+                        <label for="capacity" class="block mb-2 font-medium">Kapasite</label>
+                        <InputNumber id="capacity" v-model="tableForm.capacity" class="w-full" placeholder="Masa Kapasitesi" :min="1" />
+                        <Message v-if="$form.capacity?.invalid" severity="error" size="small" variant="simple">
+                            {{ $form.capacity.error.message }}
+                        </Message>
+                    </FormField>
+
+                    <!-- Submit Button -->
+                    <div class="w-full flex justify-end mt-4">
+                        <Button type="submit" label="Güncelle" class="p-button-success" />
+                    </div>
+                </div>
+            </Form>
+        </div>
+    </div>
+</template>
 
 <style scoped>
 /* Add custom styles if needed */

@@ -1,64 +1,3 @@
-<template>
-    <div class="card w-full">
-        <div class="page-title">Ürün Düzenleme</div>
-        <div class="w-full mt-4">
-            <Form v-slot="$form" :initialValues="productForm" :resolver="resolver" :validateOn @submit="onFormSubmit" class="flex flex-col gap-4">
-                <div class="w-full flex flex-wrap gap-4">
-                    <!-- Product Name Field -->
-                    <FormField as="section" name="name" initialValue="" class="w-[49%] py-2">
-                        <InputText v-model="productForm.name" class="w-full" type="text" placeholder="Ürün Adı" />
-                        <Message v-if="$form.name?.invalid" severity="error" size="small" variant="simple">
-                            {{ $form.name.error.message }}
-                        </Message>
-                    </FormField>
-
-                    <!-- Product Description Field -->
-                    <FormField as="section" name="description" initialValue="" class="w-[49%] py-2">
-                        <InputText v-model="productForm.description" class="w-full" type="text" placeholder="Ürün Açıklaması" />
-                        <Message v-if="$form.description?.invalid" severity="error" size="small" variant="simple">
-                            {{ $form.description.error.message }}
-                        </Message>
-                    </FormField>
-
-                    <!-- Product Price Field -->
-                    <FormField as="section" name="price" initialValue="0" class="w-[49%] py-2">
-                        <InputNumber v-model="productForm.price" class="w-full" showButtons mode="currency" locale="tr-Tr" currency="TRY" placeholder="Ürün fiyatı" />
-                        <Message v-if="$form.price?.invalid" severity="error" size="small" variant="simple">
-                            {{ $form.price.error.message }}
-                        </Message>
-                    </FormField>
-
-                    <!-- Product Category Field -->
-                    <FormField as="section" name="categoryId" initialValue="" class="w-[49%] py-2">
-                        <Select v-model="productForm.categoryId" class="w-full" :options="categoryOptions" option-label="name" option-value="id" placeholder="Kategori" />
-                        <Message v-if="$form.categoryId?.invalid" severity="error" size="small" variant="simple">
-                            {{ $form.categoryId.error.message }}
-                        </Message>
-                    </FormField>
-
-                    <!-- Product Image Field -->
-                    <FormField as="section" name="image" initialValue="" class="w-[49%] py-2 flex items-start flex-col">
-                        <div v-if="image" class="image-upload-container">
-                            <img :src="imagePath + image" alt="Selected Image" class="w-full h-full object-fill rounded-lg" />
-                            <Button icon="pi pi-trash" class="image-upload-delete-button p-button-danger" @click="removeImage" />
-                        </div>
-                        <FileUpload v-else mode="basic" name="image" url="./upload.php" accept="image/*" :maxFileSize="1000000" :file-limit="1" @select="onImageUpload" chooseLabel="Seç" :auto="false" uploadLabel="Yükle" cancelLabel="İptal" />
-
-                        <Message v-if="$form.image?.invalid" severity="error" size="small" variant="simple">
-                            {{ $form.image.error.message }}
-                        </Message>
-                    </FormField>
-
-                    <!-- Submit Button -->
-                    <div class="w-full flex justify-end mt-4">
-                        <Button type="submit" label="Güncelle" class="w-60" />
-                    </div>
-                </div>
-            </Form>
-        </div>
-    </div>
-</template>
-
 <script setup>
 import { computed, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
@@ -190,6 +129,67 @@ const getCategoryList = async () => {
     }
 };
 </script>
+
+<template>
+    <div class="card w-full">
+        <div class="page-title">Ürün Düzenleme</div>
+        <div class="w-full mt-4">
+            <Form v-slot="$form" :initialValues="productForm" :resolver="resolver" :validateOn @submit="onFormSubmit" class="flex flex-col gap-4">
+                <div class="w-full flex flex-wrap gap-4">
+                    <!-- Product Name Field -->
+                    <FormField as="section" name="name" initialValue="" class="w-[49%] py-2">
+                        <InputText v-model="productForm.name" class="w-full" type="text" placeholder="Ürün Adı" />
+                        <Message v-if="$form.name?.invalid" severity="error" size="small" variant="simple">
+                            {{ $form.name.error.message }}
+                        </Message>
+                    </FormField>
+
+                    <!-- Product Description Field -->
+                    <FormField as="section" name="description" initialValue="" class="w-[49%] py-2">
+                        <InputText v-model="productForm.description" class="w-full" type="text" placeholder="Ürün Açıklaması" />
+                        <Message v-if="$form.description?.invalid" severity="error" size="small" variant="simple">
+                            {{ $form.description.error.message }}
+                        </Message>
+                    </FormField>
+
+                    <!-- Product Price Field -->
+                    <FormField as="section" name="price" initialValue="0" class="w-[49%] py-2">
+                        <InputNumber v-model="productForm.price" class="w-full" showButtons mode="currency" locale="tr-Tr" currency="TRY" placeholder="Ürün fiyatı" />
+                        <Message v-if="$form.price?.invalid" severity="error" size="small" variant="simple">
+                            {{ $form.price.error.message }}
+                        </Message>
+                    </FormField>
+
+                    <!-- Product Category Field -->
+                    <FormField as="section" name="categoryId" initialValue="" class="w-[49%] py-2">
+                        <Select v-model="productForm.categoryId" class="w-full" :options="categoryOptions" option-label="name" option-value="id" placeholder="Kategori" />
+                        <Message v-if="$form.categoryId?.invalid" severity="error" size="small" variant="simple">
+                            {{ $form.categoryId.error.message }}
+                        </Message>
+                    </FormField>
+
+                    <!-- Product Image Field -->
+                    <FormField as="section" name="image" initialValue="" class="w-[49%] py-2 flex items-start flex-col">
+                        <div v-if="image" class="image-upload-container">
+                            <img :src="imagePath + image" alt="Selected Image" class="w-full h-full object-fill rounded-lg" />
+                            <Button icon="pi pi-trash" class="image-upload-delete-button p-button-danger" @click="removeImage" />
+                        </div>
+                        <FileUpload v-else mode="basic" name="image" url="./upload.php" accept="image/*" :maxFileSize="1000000" :file-limit="1" @select="onImageUpload" chooseLabel="Seç" :auto="false" uploadLabel="Yükle" cancelLabel="İptal" />
+
+                        <Message v-if="$form.image?.invalid" severity="error" size="small" variant="simple">
+                            {{ $form.image.error.message }}
+                        </Message>
+                    </FormField>
+
+                    <!-- Submit Button -->
+                    <div class="w-full flex justify-end mt-4">
+                        <Button type="submit" label="Güncelle" class="w-60" />
+                    </div>
+                </div>
+            </Form>
+        </div>
+    </div>
+</template>
 
 <style scoped>
 /* Add custom styles if needed */

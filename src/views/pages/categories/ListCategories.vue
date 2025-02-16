@@ -1,50 +1,3 @@
-<template>
-    <div class="card w-full">
-        <div class="page-title">Kategori Listesi</div>
-        <div class="w-full mt-4">
-            <DataTable
-                :value="categories"
-                :paginator="true"
-                :rows="10"
-                :rowsPerPageOptions="[5, 10, 20, 50]"
-                paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                currentPageReportTemplate="{first} - {last} / {totalRecords} Kategoriler"
-                responsiveLayout="scroll"
-            >
-                <!-- Category ID Column -->
-                <Column field="id" header="Kategori ID" :sortable="true"></Column>
-
-                <Column header="Resim">
-                    <template #body="{ data }">
-                        <img v-if="data.image" :src="imagePath + data.image" alt="Category Image" class="w-16 h-16 object-cover rounded-lg" />
-                        <span v-else>-</span>
-                    </template>
-                </Column>
-
-                <!-- Category Name Column -->
-                <Column field="name" header="Kategori Adı" :sortable="true"></Column>
-
-                <!-- Category Description Column -->
-                <Column field="description" header="Açıklama" :sortable="true">
-                    <template #body="{ data }">
-                        {{ data.description || '-' }}
-                    </template>
-                </Column>
-
-                <!-- Category Image Column -->
-
-                <!-- Actions Column -->
-                <Column header="İşlemler">
-                    <template #body="{ data }">
-                        <Button icon="pi pi-pencil" class="p-button-rounded p-button-success p-button-text" @click="editCategory(data.id)" />
-                        <Button icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text" @click="deleteCategory(data.id)" />
-                    </template>
-                </Column>
-            </DataTable>
-        </div>
-    </div>
-</template>
-
 <script setup>
 import { onMounted, ref } from 'vue';
 import { useToast } from 'primevue/usetoast';
@@ -95,6 +48,53 @@ const getCategoryList = async () => {
     }
 };
 </script>
+
+<template>
+    <div class="card w-full">
+        <div class="page-title">Kategori Listesi</div>
+        <div class="w-full mt-4">
+            <DataTable
+                :value="categories"
+                :paginator="true"
+                :rows="10"
+                :rowsPerPageOptions="[5, 10, 20, 50]"
+                paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+                currentPageReportTemplate="{first} - {last} / {totalRecords} Kategoriler"
+                responsiveLayout="scroll"
+            >
+                <!-- Category ID Column -->
+                <Column field="id" header="Kategori ID" :sortable="true"></Column>
+
+                <Column header="Resim">
+                    <template #body="{ data }">
+                        <img v-if="data.image" :src="imagePath + data.image" alt="Category Image" class="w-16 h-16 object-cover rounded-lg" />
+                        <span v-else>-</span>
+                    </template>
+                </Column>
+
+                <!-- Category Name Column -->
+                <Column field="name" header="Kategori Adı" :sortable="true"></Column>
+
+                <!-- Category Description Column -->
+                <Column field="description" header="Açıklama" :sortable="true">
+                    <template #body="{ data }">
+                        {{ data.description || '-' }}
+                    </template>
+                </Column>
+
+                <!-- Category Image Column -->
+
+                <!-- Actions Column -->
+                <Column header="İşlemler">
+                    <template #body="{ data }">
+                        <Button icon="pi pi-pencil" class="p-button-rounded p-button-success p-button-text" @click="editCategory(data.id)" />
+                        <Button icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text" @click="deleteCategory(data.id)" />
+                    </template>
+                </Column>
+            </DataTable>
+        </div>
+    </div>
+</template>
 
 <style scoped>
 /* Add custom styles if needed */
