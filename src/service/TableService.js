@@ -31,7 +31,7 @@ const TableService = {
         const formData = new FormData();
         formData.append('name', postData.name);
         formData.append('capacity', postData.capacity);
-        url = path + '/' + tableId;
+        const url = path + '/' + tableId;
         const response = await axiosInstance.put(url, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
