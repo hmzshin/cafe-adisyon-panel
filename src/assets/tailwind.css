@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.page-title {
+    @apply text-xl font-bold h-10 bg-primary-color rounded-md flex items-center justify-start px-4 text-white;
+}
+
+.image-upload-container {
+    @apply mt-2 w-32 h-32 border border-solid border-teal-500 relative rounded-lg;
+}
+
+.image-upload-delete-button {
+    @apply top-10 right-10 bg-primary-color text-white rounded-full p-1 invisible;
+    position: absolute !important;
+}
+
+.image-upload-container:hover .image-upload-delete-button {
+    @apply visible;
+}
